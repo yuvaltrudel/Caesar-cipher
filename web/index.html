@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+       b.text{
+        font-family: 'Barrio', cursive;
+        font-size: 30px;
+        margin-left: 180px;
+        margin-top: 20px;
+
+       }
+
+       #key-number {
+        font-family:'Barrio', cursive;
+        font-size: 25px;
+        margin-top: 30px;
+        margin-left: 70px;
+        }
+
+        #title {
+            margin-left: 200px;
+        	float: left;
+        	margin-top: 40px;
+        }
+
+        #encryptBtn {
+
+            margin-top: 40px;
+            margin-left: 420px;
+        	float: left;
+
+        }
+
+        #decryptBtn {
+
+            margin-top: 40px;
+            margin-left: 40px;
+        	float: left;
+
+        }
+
+        #btnMinus{
+            margin-left: 200px;
+            margin-top: 30px;
+
+        }
+        #btnPlus{
+            margin-left: 80px;
+            margin-top: 30px;
+
+        }
+
+        #result{
+            font-family:'Barrio', cursive;
+            font-size: 25px;
+            margin-left: 20px;
+            margin-top: 25px;
+
+        }
+
+        #user_input{
+            margin-left: 10px;
+             margin-top: 30px;
+
+        }
+
+
+
+    </style>
+
+    <title>Caesar Cipher</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<link rel="stylesheet" href="https://cdn.metroui.org.ua/v4/css/metro-all.min.css">
+    <script type="text/javascript" src="/eel.js"></script>
+</head>
+<body> <!--=oncontextmenu="return false" onselectstart="return false" ondragstart="return false">-->
+
+    <div class="container">
+
+            <div class="row">
+            <img id="title" src="images/logo.png">
+            </div>
+
+            <div class="row">
+
+                    <b id="userText" class="text">Text:</b>
+                    <input id="user_input"  size="80" type="text"  >
+
+            </div>
+
+            <div class="row">
+
+                    <b class="text">Key:</b>
+                    <button class="button dark cycle small outline " id="btnMinus"><span class="mif-chevron-thin-down"></span></button>
+                    <p id="key-number"></p>
+                    <button class="button dark cycle small outline " id="btnPlus"><span class="mif-chevron-thin-up"></span></button>
+
+            </div>
+            <div class="row">
+                <button id="encryptBtn" class="button dark large outline rounded"  ><b>Encrypt</b></button>
+                <button id="decryptBtn" class="button dark large outline rounded"  ><b>Decrypt</b></button>
+            </div>
+
+            <div class="row">
+                <b  class="text">Result:</b>
+                <p id="result" ></p>
+            </div>
+
+        </div>
+
+
+
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script src="https://cdn.metroui.org.ua/v4/js/metro.min.js"></script>
+    <script>
+
+       var number = 0;
+       var numDiv = document.getElementById('key-number');
+       var upBtn = document.getElementById('btnPlus');
+       var downBtn = document.getElementById('btnMinus');
+       numDiv.innerText=number;
+       upBtn.addEventListener("click",up)
+       downBtn.addEventListener("click",down)
+
+       function up(){
+           number++
+           numDiv.innerText=number
+       };
+       function down(){
+       if(number>0){
+           number--
+           numDiv.innerText=number
+           }else{
+           number=0
+           }
+       };
+
+        $("#encryptBtn").click(function(){
+        var text_input = $("#user_input").val();
+        eel.encrypted(text_input, number)(function(cipherText){
+            document.getElementById('result').innerText=cipherText
+
+        });
+      });
+
+      $("#decryptBtn").click(function(){
+        var text_input = $("#user_input").val();
+        eel.decrypted(text_input, number)(function(cipherText){
+            document.getElementById('result').innerText=cipherText
+
+        });
+      });
+
+    </script>
+</body>
+</html>
